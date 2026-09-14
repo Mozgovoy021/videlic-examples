@@ -20,6 +20,7 @@ session sits next to your prompt.
 --json           Output the same data as a JSON array
 --since <when>   Only sessions active on or after <when>
 --dir <path>     Directory holding project folders (default: ~/.claude/projects)
+--quiet          Suppress warnings and status notes; errors still print
 -h, --help       Show this help
 ```
 
@@ -31,6 +32,7 @@ node bin/claude-sessions.mjs --since 7d           # last week
 node bin/claude-sessions.mjs --since today        # today only
 node bin/claude-sessions.mjs --json               # machine-readable
 node bin/claude-sessions.mjs --dir ./fixtures     # somewhere other than ~/.claude/projects
+node bin/claude-sessions.mjs --quiet --json       # data only, no commentary
 node bin/claude-sessions.mjs --help
 ```
 
@@ -86,6 +88,14 @@ cutoff as UTC would list a row displaying `2026-08-31` under
 
 Both flags take `--flag value` or `--flag=value`. An unparseable `--since`
 exits 2 rather than silently filtering nothing.
+
+### --quiet
+
+Drops the commentary but keeps the data: the table (or `--json`) still goes to
+stdout, while skipped-file warnings and "nothing matched" notes stop. Errors
+always survive it — an unreadable `--dir` still reports and exits 1, a bad flag
+still exits 2 — because a non-zero exit with nothing to explain it is worse
+than one line of output.
 
 ### Layout
 

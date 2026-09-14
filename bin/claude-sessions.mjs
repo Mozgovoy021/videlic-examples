@@ -24,11 +24,12 @@ Options:
                    (2026-09-01), an ISO timestamp, a relative age (30m, 12h,
                    7d, 2w), or today/yesterday.
   --dir <path>     Directory holding project folders (default: ~/.claude/projects)
+  --quiet          Suppress warnings and status notes; errors still print
   -h, --help       Show this help
 `;
 
 function parseArgs(argv, now) {
-  const opts = { dir: DEFAULT_PROJECTS_DIR, json: false, since: null };
+  const opts = { dir: DEFAULT_PROJECTS_DIR, json: false, since: null, quiet: false };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     // Accept both "--flag value" and "--flag=value".
@@ -45,6 +46,8 @@ function parseArgs(argv, now) {
       opts.help = true;
     } else if (name === '--json') {
       opts.json = true;
+    } else if (name === '--quiet') {
+      opts.quiet = true;
     } else if (name === '--dir') {
       opts.dir = expandHome(takeValue());
     } else if (name === '--since') {
@@ -166,8 +169,20 @@ function toTable(sessions) {
   return out;
 }
 
-function warn(message) {
+// Set once from the parsed flags, before anything is read.
+let quiet = false;
+
+// Failures. Printed even under --quiet — a non-zero exit with nothing to
+// explain it is worse than one line of output. Like everything the CLI says
+// about itself this goes to stderr, leaving stdout to the listing alone so
+// --json stays safe to pipe.
+function error(message) {
   process.stderr.write(`claude-sessions: ${message}\n`);
+}
+
+// Non-fatal notes: a skipped file, nothing matched. Silenced by --quiet.
+function warn(message) {
+  if (!quiet) error(message);
 }
 
 async function main() {
@@ -175,11 +190,14 @@ async function main() {
   try {
     opts = parseArgs(process.argv.slice(2), new Date());
   } catch (err) {
-    warn(err.message);
+    error(err.message);
     process.stderr.write(`\n${USAGE}`);
     process.exitCode = 2;
     return;
   }
+  quiet = opts.quiet;
+
+  // Explicitly asked for, so --quiet does not apply.
   if (opts.help) {
     process.stdout.write(USAGE);
     return;
@@ -190,7 +208,7 @@ async function main() {
     sessions = await listSessions({ dir: opts.dir, onWarn: warn });
   } catch (err) {
     if (err.code === 'ENOENT') {
-      warn(`no such directory: ${opts.dir}`);
+      error(`no such directory: ${opts.dir}`);
       process.exitCode = 1;
       return;
     }
@@ -217,6 +235,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  warn(err.stack || String(err));
+  error(err.stack || String(err));
   process.exitCode = 1;
 });
