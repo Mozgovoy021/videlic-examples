@@ -1,0 +1,17 @@
+{
+  "name": "claude-sessions",
+  "version": "1.0.0",
+  "description": "List Claude Code session transcripts: date, project, turns, size",
+  "type": "module",
+  "bin": {
+    "claude-sessions": "bin/claude-sessions.js"
+  },
+  "scripts": {
+    "start": "node bin/claude-sessions.js",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
