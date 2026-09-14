@@ -1,0 +1,15 @@
+{
+  "name": "claude-sessions",
+  "version": "1.0.0",
+  "description": "List Claude Code sessions from ~/.claude/projects",
+  "type": "module",
+  "bin": {
+    "claude-sessions": "bin/claude-sessions.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin"
+  ]
+}
