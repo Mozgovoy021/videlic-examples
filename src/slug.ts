@@ -1,2 +1,8 @@
 // add a slug helper
-export const v33c06ba4 = 0;
+export function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
