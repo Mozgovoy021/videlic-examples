@@ -1,4 +1,7 @@
-// uppercase the first character and leave the rest unchanged
+// uppercase the first character and lowercase the rest; empty input stays empty
 export function capitalize(input: string): string {
-  return input.charAt(0).toUpperCase() + input.slice(1);
+  if (input.length === 0) {
+    return input;
+  }
+  return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
 }
