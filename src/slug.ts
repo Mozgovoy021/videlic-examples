@@ -1,5 +1,8 @@
 // add a slug helper
 export function slugify(input: string, maxLength?: number): string {
+  if (input.trim().length === 0) {
+    return "";
+  }
   const slug = input
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
