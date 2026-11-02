@@ -1,5 +1,7 @@
 import { type Cents, toCents } from "./money";
 
+export const MAX_LINES = 100;
+
 export interface Line {
   sku: string;
   price: string;
