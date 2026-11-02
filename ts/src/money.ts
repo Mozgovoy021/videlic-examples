@@ -21,3 +21,7 @@ export function splitEvenly(total: Cents, parts: number): Cents[] {
   const remainder = total - base * parts;
   return Array.from({ length: parts }, (_, i) => base + (i < remainder ? 1 : 0));
 }
+
+export function cents(n: number): number {
+  return Math.round(n * 100);
+}
