@@ -1,6 +1,9 @@
 // add a slug helper
 /** Converts a string to a lowercase, hyphen-separated slug, optionally truncated to maxLength. */
 export function slugify(input: string, maxLength?: number): string {
+  if (input.trim().length === 0) {
+    return "";
+  }
   const slug = input
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
