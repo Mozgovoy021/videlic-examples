@@ -9,6 +9,15 @@ use PHPUnit\Framework\TestCase;
 
 final class InvoiceTest extends TestCase
 {
+    public function testLineCountCountsAddedLines(): void
+    {
+        $invoice = new Invoice();
+        $this->assertSame(0, $invoice->lineCount());
+        $invoice->add('Pen', 125, 4);
+        $invoice->add('Pad', 310, 1);
+        $this->assertSame(2, $invoice->lineCount());
+    }
+
     public function testSubtotalSumsLines(): void
     {
         $invoice = new Invoice();
