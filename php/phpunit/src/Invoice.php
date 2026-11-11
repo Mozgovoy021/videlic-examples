@@ -17,6 +17,11 @@ final class Invoice
         $this->lines[] = [$description, $unitCents, $quantity];
     }
 
+    public function lineCount(): int
+    {
+        return count($this->lines);
+    }
+
     public function subtotalCents(): int
     {
         $sum = 0;
