@@ -10,6 +10,7 @@ final class Slug
     {
         $slug = strtolower(trim($text));
         $slug = preg_replace('/[^a-z0-9]+/', '-', $slug) ?? '';
+        $slug = preg_replace('/-{2,}/', '-', $slug) ?? '';
         return trim($slug, '-');
     }
 }
