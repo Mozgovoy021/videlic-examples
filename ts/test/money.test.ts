@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { formatCents, splitEvenly, toCents } from "../src/money";
+import { cents, formatCents, splitEvenly, toCents } from "../src/money";
+
+describe("cents", () => {
+  it("rounds a number to whole cents", () => {
+    expect(cents(12.34)).toBe(1234);
+  });
+});
 
 describe("toCents", () => {
   it("reads whole and fractional amounts", () => {
