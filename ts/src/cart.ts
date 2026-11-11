@@ -15,3 +15,7 @@ export function cartTotal(lines: Line[], discountPercent = 0): Cents {
   const subtotal = lines.reduce((sum, line) => sum + lineTotal(line), 0);
   return subtotal - Math.round((subtotal * discountPercent) / 100);
 }
+
+export function isEmpty(lines: unknown[]): boolean {
+  return lines.length === 0;
+}
