@@ -13,3 +13,7 @@ it('returns an empty slug for punctuation only', function () {
 it('keeps digits', function () {
     expect(Slug::from('Release 2.0'))->toBe('release-2-0');
 });
+
+it('collapses dashes left by unicode letters', function () {
+    expect(Slug::from('Crème — brûlée ñandú'))->toBe('cr-me-br-l-e-and');
+});
