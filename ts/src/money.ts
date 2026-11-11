@@ -9,6 +9,7 @@ export function toCents(amount: string): Cents {
   return sign ? -cents : cents;
 }
 
+// Renders cents as a decimal string with exactly two fractional digits.
 export function formatCents(cents: Cents): string {
   const sign = cents < 0 ? "-" : "";
   const abs = Math.abs(cents);
