@@ -31,4 +31,9 @@ final class Invoice
         $subtotal = $this->subtotalCents();
         return $subtotal + intdiv($subtotal * $taxPercent + 50, 100);
     }
+
+    public function lineCount(): int
+    {
+        return count($this->lines);
+    }
 }
