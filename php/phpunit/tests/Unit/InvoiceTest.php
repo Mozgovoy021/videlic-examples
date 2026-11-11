@@ -29,4 +29,13 @@ final class InvoiceTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         (new Invoice())->add('Pen', 125, 0);
     }
+
+    public function testLineCountCountsAddedLines(): void
+    {
+        $invoice = new Invoice();
+        $this->assertSame(0, $invoice->lineCount());
+        $invoice->add('Pen', 125, 4);
+        $invoice->add('Pad', 310, 1);
+        $this->assertSame(2, $invoice->lineCount());
+    }
 }
