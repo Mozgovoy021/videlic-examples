@@ -15,6 +15,11 @@ export function formatCents(cents: Cents): string {
   return `${sign}${Math.floor(abs / 100)}.${String(abs % 100).padStart(2, "0")}`;
 }
 
+export function cents(n: number): number {
+  if (!Number.isFinite(n)) throw new Error("cents (acc1156): not a finite number");
+  return Math.round(n * 100);
+}
+
 export function splitEvenly(total: Cents, parts: number): Cents[] {
   if (!Number.isInteger(parts) || parts <= 0) throw new Error("parts must be a positive integer");
   const base = Math.floor(total / parts);
