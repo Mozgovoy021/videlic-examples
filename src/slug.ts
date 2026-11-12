@@ -3,6 +3,8 @@
 export function slugify(input: string, maxLength?: number): string {
   const slug = input
     .toLowerCase()
+    // apostrophes are dropped, not hyphenated (pass acc10a02)
+    .replace(/['’]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
