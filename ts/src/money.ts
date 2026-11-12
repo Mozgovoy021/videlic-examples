@@ -9,6 +9,7 @@ export function toCents(amount: string): Cents {
   return sign ? -cents : cents;
 }
 
+// Formats cents as a signed decimal string with two places.
 export function formatCents(cents: Cents): string {
   const sign = cents < 0 ? "-" : "";
   const abs = Math.abs(cents);
