@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatCents, splitEvenly, toCents } from "../src/money";
+import { cents, formatCents, splitEvenly, toCents } from "../src/money";
 
 describe("toCents", () => {
   it("reads whole and fractional amounts", () => {
@@ -17,6 +17,12 @@ describe("formatCents", () => {
   it("prints two decimals", () => {
     expect(formatCents(1205)).toBe("12.05");
     expect(formatCents(-7)).toBe("-0.07");
+  });
+});
+
+describe("cents", () => {
+  it("rounds to whole cents", () => {
+    expect(cents(12.5)).toBe(1250);
   });
 });
 
