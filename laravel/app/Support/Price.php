@@ -9,4 +9,12 @@ final class Price
     {
         return intdiv($cents * (100 + $ratePercent) + 50, 100);
     }
+
+    /** Cents with the tax rate (in percent) removed again, rounded half up. */
+    public static function withoutTax(int $cents, int $ratePercent): int
+    {
+        $divisor = 100 + $ratePercent;
+
+        return intdiv($cents * 100 + intdiv($divisor, 2), $divisor);
+    }
 }
