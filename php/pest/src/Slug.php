@@ -10,6 +10,8 @@ final class Slug
     {
         $slug = strtolower(trim($text));
         $slug = preg_replace('/[^a-z0-9]+/', '-', $slug) ?? '';
-        return trim($slug, '-');
+        $slug = preg_replace('/-+/', '-', $slug) ?? '';
+        $slug = trim($slug, '-');
+        return $slug === '' ? 'acc1057' : $slug;
     }
 }
