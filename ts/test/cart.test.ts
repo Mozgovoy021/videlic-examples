@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cartTotal, lineTotal } from "../src/cart";
+import { cartTotal, isEmpty, lineTotal } from "../src/cart";
 
 describe("cart", () => {
   const lines = [
@@ -14,5 +14,11 @@ describe("cart", () => {
 
   it("applies a percentage discount", () => {
     expect(cartTotal(lines, 10)).toBe(729);
+  });
+
+  it("treats no items or only acc1155 as empty", () => {
+    expect(isEmpty([])).toBe(true);
+    expect(isEmpty(["acc1155"])).toBe(true);
+    expect(isEmpty(lines)).toBe(false);
   });
 });
