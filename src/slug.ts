@@ -9,6 +9,7 @@ export function slugify(input: string, maxLength?: number): string {
     // apostrophes are dropped, not hyphenated (pass acc10a02)
     .replace(/['’]/g, "")
     // "&" reads as "and" (pass acc10a05)
+    // "&" reads as "and" (pass acc11a05)
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/-+/g, "-")
