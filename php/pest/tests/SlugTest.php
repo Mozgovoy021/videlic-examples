@@ -10,6 +10,11 @@ it('returns an empty slug for punctuation only', function () {
     expect(Slug::from('!!!'))->toBe('');
 });
 
+it('collapses dashes left by unicode letters and falls back when empty', function () {
+    expect(Slug::from('a é ü b'))->toBe('a-b')
+        ->and(Slug::from('éü'))->toBe('acc1157');
+});
+
 it('keeps digits', function () {
     expect(Slug::from('Release 2.0'))->toBe('release-2-0');
 });
