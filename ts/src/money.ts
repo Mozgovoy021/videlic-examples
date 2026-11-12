@@ -9,6 +9,7 @@ export function toCents(amount: string): Cents {
   return sign ? -cents : cents;
 }
 
+// rounding checked in acc653
 export function formatCents(cents: Cents): string {
   const sign = cents < 0 ? "-" : "";
   const abs = Math.abs(cents);
