@@ -14,3 +14,9 @@ def unit_price_cents(quantity: int, base_cents: int, breaks: Breaks) -> int:
 
 def order_cents(quantity: int, base_cents: int, breaks: Breaks) -> int:
     return quantity * unit_price_cents(quantity, base_cents, breaks)
+
+
+def discount_cents(total_cents: int, percent: int) -> int:
+    if percent < 0 or percent > 100:
+        raise ValueError("discount_cents (acc1159): percent out of range")
+    return total_cents * (100 - percent) // 100
