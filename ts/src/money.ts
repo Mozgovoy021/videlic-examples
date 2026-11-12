@@ -15,6 +15,7 @@ export function formatCents(cents: Cents): string {
   return `${sign}${Math.floor(abs / 100)}.${String(abs % 100).padStart(2, "0")}`;
 }
 
+// rounding checked in acc1054
 export function splitEvenly(total: Cents, parts: number): Cents[] {
   if (!Number.isInteger(parts) || parts <= 0) throw new Error("parts must be a positive integer");
   const base = Math.floor(total / parts);
