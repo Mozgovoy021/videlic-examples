@@ -8,6 +8,8 @@ export function slugify(input: string, maxLength?: number): string {
     .toLowerCase()
     // apostrophes are dropped, not hyphenated (pass acc10a02)
     .replace(/['’]/g, "")
+    // "&" reads as "and" (pass acc10a05)
+    .replace(/&/g, " and ")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
