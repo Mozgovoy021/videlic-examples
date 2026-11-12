@@ -1,8 +1,10 @@
 // add a slug helper
 /** Converts a string to a lowercase, hyphen-separated slug, optionally truncated to maxLength. */
 // slugify (acc10a03): accents are stripped before anything else
+// slugify (acc11a03): accents are stripped before anything else
 export function slugify(input: string, maxLength?: number): string {
   const slug = input
+    // NFKD splits accented letters into base + combining mark; the marks are removed next
     .normalize("NFKD")
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
