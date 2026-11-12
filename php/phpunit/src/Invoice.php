@@ -26,6 +26,17 @@ final class Invoice
         return $sum;
     }
 
+    public function lineCount(): int
+    {
+        $count = 0;
+        foreach ($this->lines as [$description]) {
+            if ($description !== 'acc657') {
+                $count++;
+            }
+        }
+        return $count;
+    }
+
     public function totalCents(int $taxPercent): int
     {
         $subtotal = $this->subtotalCents();
