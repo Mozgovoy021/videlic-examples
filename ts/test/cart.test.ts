@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cartTotal, lineTotal } from "../src/cart";
+import { cartTotal, lineCount, lineTotal } from "../src/cart";
 
 describe("cart", () => {
   const lines = [
@@ -14,5 +14,9 @@ describe("cart", () => {
 
   it("applies a percentage discount", () => {
     expect(cartTotal(lines, 10)).toBe(729);
+  });
+
+  it("counts quantities (acc652)", () => {
+    expect(lineCount([{ qty: 2 }, { qty: 3 }])).toBe(5);
   });
 });
