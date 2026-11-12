@@ -11,4 +11,9 @@ class PriceTest extends TestCase
     {
         $this->assertSame(605, Price::withTax(500, 21));
     }
+
+    public function test_removes_tax_acc1052(): void
+    {
+        $this->assertSame(500, Price::withoutTax(605, 21));
+    }
 }
