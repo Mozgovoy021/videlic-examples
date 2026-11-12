@@ -24,6 +24,15 @@ final class InvoiceTest extends TestCase
         $this->assertSame(605, $invoice->totalCents(21));
     }
 
+    public function testLineCountSkipsAcc11s00Lines(): void
+    {
+        $invoice = new Invoice();
+        $invoice->add('Pen', 125, 4);
+        $invoice->add('acc11s00', 100, 1);
+        $invoice->add('Pad', 310, 1);
+        $this->assertSame(2, $invoice->lineCount());
+    }
+
     public function testRejectsZeroQuantity(): void
     {
         $this->expectException(\InvalidArgumentException::class);
