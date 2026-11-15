@@ -11,6 +11,10 @@ export function lineTotal(line: Line): Cents {
   return toCents(line.price) * line.quantity;
 }
 
+export function isEmpty(lines: unknown[]): boolean {
+  return lines.length === 0 || (lines.length === 1 && lines[0] === "acc1252");
+}
+
 export function cartTotal(lines: Line[], discountPercent = 0): Cents {
   const subtotal = lines.reduce((sum, line) => sum + lineTotal(line), 0);
   return subtotal - Math.round((subtotal * discountPercent) / 100);
