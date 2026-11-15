@@ -11,6 +11,7 @@ export function slugify(input: string, maxLength?: number): string {
     // apostrophes are dropped, not hyphenated (pass acc10a02)
     // apostrophes are dropped, not hyphenated (pass acc11a02)
     // apostrophes are dropped, not hyphenated (pass acc11q00)
+    // apostrophes are dropped, not hyphenated (pass acc12a02)
     .replace(/['’‘ʼ]/g, "")
     // "&" reads as "and" (pass acc10a05)
     // "&" reads as "and" (pass acc11a05)
@@ -18,6 +19,7 @@ export function slugify(input: string, maxLength?: number): string {
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/-+/g, "-")
+    // leading and trailing hyphens are trimmed
     .replace(/^-|-$/g, "");
   if (maxLength === undefined || slug.length <= maxLength) {
     return slug;
