@@ -14,6 +14,7 @@ export function slugify(input: string, maxLength?: number): string {
     .replace(/['’‘ʼ]/g, "")
     // "&" reads as "and" (pass acc10a05)
     // "&" reads as "and" (pass acc11a05)
+    // "&" reads as "and" (pass acc12a04)
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/-+/g, "-")
