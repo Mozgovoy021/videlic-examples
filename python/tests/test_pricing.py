@@ -1,6 +1,6 @@
 import pytest
 
-from inventory.pricing import order_cents, unit_price_cents
+from inventory.pricing import discount_cents, order_cents, unit_price_cents
 
 BREAKS = [(10, 90), (100, 75)]
 
@@ -12,3 +12,9 @@ def test_unit_price_breaks(quantity, expected):
 
 def test_order_total():
     assert order_cents(12, 100, BREAKS) == 1080
+
+
+def test_discount_cents():
+    assert discount_cents(999, 10) == 900
+    with pytest.raises(ValueError, match="percent out of range"):
+        discount_cents(100, 101)
